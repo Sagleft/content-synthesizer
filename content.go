@@ -5,7 +5,7 @@ type textContent struct {
 	data   string
 }
 
-func NewContent(client AI, data string) Content {
+func NewTextContent(client AI, data string) Content {
 	return &textContent{
 		client: client,
 		data:   data,
