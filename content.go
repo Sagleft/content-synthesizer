@@ -78,8 +78,11 @@ func (c *textContent) CreateStructure(dataExample any, destPointer any) error {
 	return nil
 }
 
-func (c *textContent) YesOrNo(Question) (bool, error) {
-	reqPrompt := Prompt(fmt.Sprintf(promptGetBinary, c.String()))
+func (c *textContent) YesOrNo(q Question) (bool, error) {
+	reqPrompt := Prompt(fmt.Sprintf(
+		promptGetBinary,
+		c.String(), q,
+	))
 
 	response, err := c.client.GetPlainAnswer(reqPrompt)
 	if err != nil {
