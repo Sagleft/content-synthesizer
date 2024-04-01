@@ -5,7 +5,7 @@ type Prompt string
 type Question string
 
 type AI interface {
-	GetPlainAnswer(Prompt) (string, error)
+	GetPlainAnswer(prompt string) (string, error)
 }
 
 type Content interface {

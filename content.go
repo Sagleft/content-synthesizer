@@ -23,10 +23,10 @@ func (c *textContent) String() string {
 }
 
 func (c *textContent) Join(ct Content, joint Prompt) (Content, error) {
-	newPrompt := Prompt(fmt.Sprintf(
+	newPrompt := fmt.Sprintf(
 		"%s: \n\ntext1:\n%s\n\ntext2:\n%s",
 		joint, c.String(), ct.String(),
-	))
+	)
 
 	answer, err := c.client.GetPlainAnswer(newPrompt)
 	if err != nil {
@@ -37,10 +37,10 @@ func (c *textContent) Join(ct Content, joint Prompt) (Content, error) {
 }
 
 func (c *textContent) Modify(p Prompt) (Content, error) {
-	newPrompt := Prompt(fmt.Sprintf(
+	newPrompt := fmt.Sprintf(
 		`%s: \n\n"%s"`,
 		p, c.String(),
-	))
+	)
 
 	answer, err := c.client.GetPlainAnswer(newPrompt)
 	if err != nil {
@@ -60,10 +60,10 @@ func (c *textContent) CreateStructure(dataExample any, destPointer any) error {
 		return fmt.Errorf("encode example: %w", err)
 	}
 
-	requestPrompt := Prompt(fmt.Sprintf(
+	requestPrompt := fmt.Sprintf(
 		promptGetJSON,
 		c.String(), string(exampleBytes),
-	))
+	)
 
 	plainAnswer, err := c.client.GetPlainAnswer(requestPrompt)
 	if err != nil {
@@ -79,10 +79,10 @@ func (c *textContent) CreateStructure(dataExample any, destPointer any) error {
 }
 
 func (c *textContent) YesOrNo(q Question) (bool, error) {
-	reqPrompt := Prompt(fmt.Sprintf(
+	reqPrompt := fmt.Sprintf(
 		promptGetBinary,
 		c.String(), q,
-	))
+	)
 
 	response, err := c.client.GetPlainAnswer(reqPrompt)
 	if err != nil {
