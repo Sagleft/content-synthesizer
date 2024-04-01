@@ -18,6 +18,15 @@ func NewTextContent(client AI, data string) Content {
 	}
 }
 
+func CreateTextContent(client AI, prompt string) (Content, error) {
+	data, err := client.GetPlainAnswer(prompt)
+	if err != nil {
+		return nil, fmt.Errorf("get answer: %w", err)
+	}
+
+	return NewTextContent(client, data), nil
+}
+
 func (c *textContent) String() string {
 	return c.data
 }
